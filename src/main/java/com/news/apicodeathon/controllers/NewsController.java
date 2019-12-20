@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin
+
 @RestController
 public class NewsController {
     @Autowired
     private NewsService newsService;
 
 
+    @CrossOrigin
     @GetMapping(value = "docs/top-headlines")
     public ResponseEntity<?> getTopNews(@RequestParam(value = "language", required = false) String language,
                                         @RequestParam(value = "country", required = false) String country,
@@ -24,11 +25,13 @@ public class NewsController {
         return ResponseEntity.ok(newsService.getArticlesByType("top-headlines", null, language, country, sources, category));
     }
 
+    @CrossOrigin
     @GetMapping(value = "docs/everything")
     public ResponseEntity<?> getEverything(@RequestParam(value = "q", required = false) String q) {
         return ResponseEntity.ok(newsService.getArticlesByType("everything", q, null, null, null, null));
     }
 
+    @CrossOrigin
     @GetMapping(value = "docs/sources", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getSources(@RequestParam(value = "language", required = false) String language,
                                         @RequestParam(value = "country", required = false) String country) {
